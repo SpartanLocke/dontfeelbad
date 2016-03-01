@@ -27,7 +27,7 @@ public class explosionController : MonoBehaviour {
 
 	IEnumerator explode()
 	{
-		yield return new WaitForSeconds (2);
+		yield return new WaitForSeconds (1);
 		Destroy (gameObject);
 	}
 }

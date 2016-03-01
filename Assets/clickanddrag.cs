@@ -39,14 +39,13 @@ public class clickanddrag : MonoBehaviour
         UnityEngine.Cursor.visible = true;
         if (gameObject.tag != "mine")
         {
-			var mousePos = Input.mousePosition;
             Destroy(gameObject);
             //put your conditions to trigger your event here
-			Instantiate(landMine, mousePos, Quaternion.identity);
         }
         else{
-            
-            transform.position = point;
+			Destroy (gameObject);
+			Instantiate(landMine, point, Quaternion.identity);
+            //transform.position = point;
         }
     }
 }
