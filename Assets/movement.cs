@@ -9,7 +9,7 @@ public class movement : MonoBehaviour
     public int currentWayPoint = 0;
     Transform targetWayPoint;
 
-    public float speed = 4f;
+    public float speed = 1f;
 
     // Use this for initialization
     void Start()
@@ -23,14 +23,8 @@ public class movement : MonoBehaviour
         // check if we have somewere to walk
         if (currentWayPoint < this.wayPointList.Length)
         {
-            if (targetWayPoint == null)
-                targetWayPoint = wayPointList[currentWayPoint];
+            if (targetWayPoint == null) targetWayPoint = wayPointList[currentWayPoint];
             walk();
-        }
-        else
-        {
-            currentWayPoint = 0;
-            targetWayPoint = null;
         }
     }
 
@@ -45,6 +39,10 @@ public class movement : MonoBehaviour
         if (transform.position == targetWayPoint.position)
         {
             currentWayPoint++;
+            if (currentWayPoint >= wayPointList.Length)
+            {
+                currentWayPoint = 0;
+            }
             targetWayPoint = wayPointList[currentWayPoint];
         }
     }
