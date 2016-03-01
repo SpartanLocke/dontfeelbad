@@ -14,6 +14,7 @@ public class explosionController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		Debug.Log (men.Length);
 		foreach (GameObject man in men) {
 			if (man != null) {
 				float distanceSqr = (gameObject.transform.position - man.transform.position).sqrMagnitude;
