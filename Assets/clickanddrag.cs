@@ -27,6 +27,10 @@ public class clickanddrag : MonoBehaviour
             originalSize = gameObject.transform.localScale;
             gameObject.transform.localScale = originalSize * scale;
         }
+        if (gameObject.GetComponent<AudioSource>() != null)
+        {
+            gameObject.GetComponent<AudioSource>().Play();
+        }
 
     }
     void OnMouseDrag()
