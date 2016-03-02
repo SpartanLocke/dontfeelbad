@@ -19,7 +19,7 @@ public class explosionController : MonoBehaviour {
 			if (man != null) {
 				float distanceSqr = (gameObject.transform.position - man.transform.position).sqrMagnitude;
 				if (distanceSqr < radius) {
-					Destroy (man);
+                    Destroy (man);
 				}
 			}
 		}
@@ -27,7 +27,7 @@ public class explosionController : MonoBehaviour {
 
 	IEnumerator explode()
 	{
-		yield return new WaitForSeconds (1);
+        yield return new WaitForSeconds (1);
 		Destroy (gameObject);
 	}
 }
