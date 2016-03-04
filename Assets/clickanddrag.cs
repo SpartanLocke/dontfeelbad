@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 //[RequireComponent(typeof(SphereCollider))]
 
@@ -9,10 +10,12 @@ public class clickanddrag : MonoBehaviour
     public float scale;
 	public GameObject landMine;
     public HeartAttack ha;
+	public DisplayDeathCounter deathCounter;
     private Vector3 originalSize;
     private Vector3 originalPos;
     public Vector3 point;
     private bool moved = false;
+
 
     void Start()
     {
@@ -55,7 +58,10 @@ public class clickanddrag : MonoBehaviour
             {
                 bool killed = ha.activate(point);
                 if (killed) {
+					deathCounter.addScore (1);
                     Destroy(gameObject);
+
+
                 } else
                 {
                     //MOVE BACK TO ORIGINAL SPOT
