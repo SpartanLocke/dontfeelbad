@@ -25,13 +25,20 @@ public class TrafficLight : MonoBehaviour {
 		return (state == 0);
 	}
 
+	public void breakLight()
+	{
+		broken = true;
+		StopCoroutine (setLight ());
+		// if light is broken - permanently green
+		state = 0;
+		GetComponent<Renderer> ().material.color = new Color (0, 1, 0);
+	}
 	IEnumerator setLight()
 	{
 		
-    while(true && !broken)
+    while(!broken)
     {
 			if (northSouth) {
-				Debug.Log ("In here");
 				state = 0;
 				GetComponent<Renderer> ().material.color = new Color (0, 1, 0);
 				yield return new WaitForSeconds (3);

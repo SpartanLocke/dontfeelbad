@@ -9,6 +9,7 @@ public class CarMovement : MonoBehaviour {
 	public bool vertical;
 	Transform targetWayPoint;
 	public GameObject stopLight;
+	public GameObject explosion;
 
 	public float speed = 1f;
 
@@ -54,5 +55,12 @@ public class CarMovement : MonoBehaviour {
 			}
 			targetWayPoint = wayPointList[currentWayPoint];
 		}
+	}
+
+	void OnTriggerEnter2D(Collider2D other) {
+		// For now explode on contact - TODO: later check type of collision
+		Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
+		Destroy (gameObject);
+
 	}
 }
