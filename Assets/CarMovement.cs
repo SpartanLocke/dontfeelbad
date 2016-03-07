@@ -59,7 +59,6 @@ public class CarMovement : MonoBehaviour {
 		
 
 	void OnCollisionEnter2D(Collision2D coll){
-		Debug.Log ("Hit");
 		if (coll.gameObject.tag == "car") {
 			Instantiate (explosion, gameObject.transform.position, Quaternion.identity);
 			Destroy (gameObject);
