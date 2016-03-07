@@ -35,16 +35,16 @@ public class shooter : MonoBehaviour {
 
     void OnCollisionEnter2D(Collision2D coll)       //In order for this to work, must turn off isKinematic, must set the mass and gravity to zero, and fix all constraints on the rigidbody
     {
-        Debug.Log("I ran into a dude");
-        if (berserk && coll.gameObject.tag == "man") //Kill any man i run into while berserk
-        {
-            Destroy(coll.gameObject);
-        }
-        if (gun && coll.gameObject.GetComponent<shooter>().berserk)  //if i run into a berserk guy and i have a gun, kill him
-        {
-            Destroy(coll.gameObject);
-        }
-            
-
+		if (coll.gameObject.tag == "car") {
+			Destroy (gameObject);
+		} else {
+			Debug.Log ("I ran into a dude");
+			if (berserk && coll.gameObject.tag == "man") { //Kill any man i run into while berserk
+				Destroy (coll.gameObject);
+			}
+			if (gun && coll.gameObject.GetComponent<shooter> ().berserk) {  //if i run into a berserk guy and i have a gun, kill him
+				Destroy (coll.gameObject);
+			}
+		}
     }
 }
