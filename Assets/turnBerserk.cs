@@ -4,7 +4,7 @@ using System.Collections;
 public class turnBerserk : MonoBehaviour
 {
 
-    public int radius = 50;
+    public int radius = 25;
     public GameObject BrokenHeart;
 
     public bool activate(Vector3 point)
