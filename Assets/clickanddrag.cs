@@ -9,7 +9,10 @@ public class clickanddrag : MonoBehaviour
     public float speed = 1.0f;
     public float scale;
 	public GameObject landMine;
+    public GameObject meteorExplosion;
+    public GameObject meteorVisualization;
     public HeartAttack ha;
+    public turnBerserk tb;
 	public DisplayDeathCounter deathCounter;
     private Vector3 originalSize;
     private Vector3 originalPos;
@@ -52,29 +55,53 @@ public class clickanddrag : MonoBehaviour
     {
         moved = true;
         UnityEngine.Cursor.visible = true;
-        if (gameObject.tag != "mine")
+
+        if (gameObject.tag == "heartattack") //TODO: move this logic outside
         {
-            if (gameObject.tag == "heartattack") //TODO: move this logic outside
+            bool killed = ha.activate(point);
+            if (killed)
             {
-                bool killed = ha.activate(point);
-                if (killed) {
-					deathCounter.addScore (1);
-                    Destroy(gameObject);
+                deathCounter.addScore(1);
+                Destroy(gameObject);
 
 
-                } else
-                {
-                    //MOVE BACK TO ORIGINAL SPOT
-                    moved = false;
-                    gameObject.transform.localScale = originalSize;
-                    gameObject.transform.position = originalPos;
-                }
+            }
+            else
+            {
+                //MOVE BACK TO ORIGINAL SPOT
+                moved = false;
+                gameObject.transform.localScale = originalSize;
+                gameObject.transform.position = originalPos;
             }
         }
-        else{
-			Destroy (gameObject);
-			Instantiate(landMine, point, Quaternion.identity);
+        else if (gameObject.tag == "shooter") 
+        {
+            bool infected = tb.activate(point);
+            if (!infected)
+            {
+                moved = false;
+                gameObject.transform.localScale = originalSize;
+                gameObject.transform.position = originalPos;
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+        }
+        else if (gameObject.tag == "meteor")
+        {
+            Destroy(gameObject);
+            Instantiate(meteorExplosion, point, Quaternion.identity);
+            //point.z = 2.0f;
+            //Instantiate(meteorVisualization, point, Quaternion.identity);
+        }
+        else if (gameObject.tag == "mine")
+        {
+
+            Destroy(gameObject);
+            Instantiate(landMine, point, Quaternion.identity);
             //transform.position = point;
         }
+       
     }
 }

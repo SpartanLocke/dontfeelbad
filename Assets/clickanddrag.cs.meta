@@ -1,10 +1,16 @@
 fileFormatVersion: 2
 guid: fcea302a473b9dd4c8521524eead472d
-timeCreated: 1456798556
+timeCreated: 1457133148
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - landMine: {instanceID: 0}
+  - meteorExplosion: {instanceID: 0}
+  - meteorVisualization: {fileID: 106802, guid: 8a01e52c967300c4c8c0f0045758e7e1,
+      type: 2}
+  - ha: {instanceID: 0}
+  - deathCounter: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
