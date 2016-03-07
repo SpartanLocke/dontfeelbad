@@ -16,20 +16,25 @@ public class state : MonoBehaviour {
 	void Start () {
 		current_state = "normal";
 		if (current_state == "normal") {
-			Instantiate (happy, gameObject.transform.position, Quaternion.identity);
+			GameObject stateObj = new GameObject ();
+			stateObj = (GameObject) Instantiate (happy, gameObject.transform.position, Quaternion.identity);
+			stateObj.transform.parent = gameObject.transform;
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		if (changed) {
+			GameObject stateObj = new GameObject ();
 			if (current_state == "normal") {
-				Instantiate (happy, gameObject.transform.position, Quaternion.identity);
-
+				stateObj = (GameObject) Instantiate (happy, gameObject.transform.position, Quaternion.identity);
+				stateObj.transform.parent = gameObject.transform;
 			}
 			if (current_state == "sad") {
-				Instantiate (upset, gameObject.transform.position, Quaternion.identity);
+				stateObj = (GameObject) Instantiate (upset, gameObject.transform.position, Quaternion.identity);
+				stateObj.transform.parent = gameObject.transform;
 			}
+
 			changed = false;
 		}
 	}
