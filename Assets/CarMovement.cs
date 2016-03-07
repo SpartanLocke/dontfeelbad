@@ -13,7 +13,7 @@ public class CarMovement : MonoBehaviour {
 
 	public float speed = 1f;
 
-	private static int carIntersectPoint = 1;
+	private int carIntersectPoint = 1;
 	// Use this for initialization
 	void Start()
 	{
