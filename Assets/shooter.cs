@@ -39,11 +39,13 @@ public class shooter : MonoBehaviour {
 			Destroy (gameObject);
 		} else {
 			Debug.Log ("I ran into a dude");
-			if (berserk && coll.gameObject.tag == "man") { //Kill any man i run into while berserk
-				Destroy (coll.gameObject);
-			}
-			if (gun && coll.gameObject.GetComponent<shooter> ().berserk) {  //if i run into a berserk guy and i have a gun, kill him
-				Destroy (coll.gameObject);
+			if (coll.gameObject.tag == "man") {
+				if (berserk) { //Kill any man i run into while berserk
+					Destroy (coll.gameObject);
+				}
+				if (gun && coll.gameObject.GetComponent<shooter> ().berserk) {  //if i run into a berserk guy and i have a gun, kill him
+					Destroy (coll.gameObject);
+				}
 			}
 		}
     }

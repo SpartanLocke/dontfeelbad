@@ -9,6 +9,7 @@ public class movement : MonoBehaviour
     public int currentWayPoint = 0;
     Transform targetWayPoint;
     public float speed = 1f;
+	public DisplayDeathCounter deathCounter;
 
 	private TrafficController trafficController;
     // Use this for initialization
@@ -76,4 +77,9 @@ public class movement : MonoBehaviour
             targetWayPoint = wayPointList[currentWayPoint];
         }
     }
+
+	void OnDestroy(){
+		// TODO: Score depends on person
+		deathCounter.addScore (1);
+	}
 }
