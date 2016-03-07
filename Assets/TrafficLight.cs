@@ -49,7 +49,6 @@ public class TrafficLight : MonoBehaviour {
 				GetComponent<Renderer> ().material.color = new Color (1, 0, 0);
 				yield return new WaitForSeconds (6);
 			} else {
-				Debug.Log ("In here");
 				state = 2;
 				GetComponent<Renderer> ().material.color = new Color (1, 0, 0);
 				yield return new WaitForSeconds (6);
