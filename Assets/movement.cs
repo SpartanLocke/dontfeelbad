@@ -8,13 +8,16 @@ public class movement : MonoBehaviour
 
     public int currentWayPoint = 0;
     Transform targetWayPoint;
-
     public float speed = 1f;
 
+	private TrafficController trafficController;
     // Use this for initialization
     void Start()
     {
-
+		GameObject trafficControl = GameObject.FindWithTag ("trafficController");
+		if(trafficControl){
+			trafficController = trafficControl.GetComponent<TrafficController> ();
+		}
     }
 
     // Update is called once per frame
@@ -24,7 +27,40 @@ public class movement : MonoBehaviour
         if (currentWayPoint < this.wayPointList.Length)
         {
             if (targetWayPoint == null) targetWayPoint = wayPointList[currentWayPoint];
-            walk();
+
+			// If we are not at a corner, walk to the next waypoint
+			// This assumes people will only cross the street at corners
+			// If they cross the street somewhere else they can get hit by a car still
+			if (!(wayPointList [currentWayPoint].tag == "corner")) {
+				walk ();
+			}
+			else{
+				// Don't check for crossing until person actually reaches corner
+				if (Vector3.Distance(gameObject.transform.position,wayPointList [currentWayPoint].transform.position) <0.2) {
+					// Corner Waypoints must be aligned with the same x and y values
+					//Debug.Log("Checking Crossing");
+					if (wayPointList [currentWayPoint].transform.position.x == wayPointList [(currentWayPoint +1)%wayPointList.Length].transform.position.x) {
+						Debug.Log ("Vertical Cross: ");
+						//Debug.Log ("Current pos: " + wayPointList [currentWayPoint].transform.position );
+						//Debug.Log ("Target pos: " + targetWayPoint.transform.position );
+						if (trafficController.verticalIsGreen ()) {
+							walk ();
+						}
+					} else if (wayPointList [currentWayPoint].transform.position.y == wayPointList [(currentWayPoint +1)%wayPointList.Length].transform.position.y) {
+						Debug.Log ("Horizontal Cross: ");
+						//Debug.Log ("Current pos: " + wayPointList [currentWayPoint].transform.position );
+						//Debug.Log ("Target pos: " + targetWayPoint.transform.position );
+						if (trafficController.horizontalIsGreen ()) {
+							walk ();
+						}
+					} else {
+						// Other cases such as walking diagonally we just allow them to walk since they arent adhering to traffic rules anyway
+						walk ();
+					}
+				} else {
+					walk ();
+				}
+			}
         }
     }
 

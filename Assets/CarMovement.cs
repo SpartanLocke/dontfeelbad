@@ -22,7 +22,6 @@ public class CarMovement : MonoBehaviour {
 	// Update is called once per frame
 	void Update()
 	{
-		Debug.Log(currentWayPoint);
 		// check if we have somewere to walk
 		if (currentWayPoint < this.wayPointList.Length)
 		{
