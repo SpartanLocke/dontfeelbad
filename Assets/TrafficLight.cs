@@ -21,12 +21,13 @@ public class TrafficLight : MonoBehaviour {
 	void Update () {
 	
 	}
-
+	// Check if light is green
 	public bool isGreen()
 	{
 		return (state == 0);
 	}
 
+	// Sets Light to permanently green
 	public void breakLight()
 	{
 		broken = true;
@@ -40,6 +41,7 @@ public class TrafficLight : MonoBehaviour {
 		
     while(!broken)
     {
+			// Cycle through red yellow and green (opposite for vertical and horizontal lights)
 			if (northSouth) {
 				state = 0;
 				GetComponent<Renderer> ().material.color = new Color (0, 1, 0);

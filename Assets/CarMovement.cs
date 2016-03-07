@@ -13,6 +13,7 @@ public class CarMovement : MonoBehaviour {
 
 	public float speed = 1f;
 
+	private static int carIntersectPoint = 1;
 	// Use this for initialization
 	void Start()
 	{
@@ -28,8 +29,8 @@ public class CarMovement : MonoBehaviour {
 			if (targetWayPoint == null) targetWayPoint = wayPointList[currentWayPoint];
 			//Check if at stoplight
 			// Probably should change this to a tag on the waypoint later
-			if (vertical && transform.position.y == wayPointList [1].position.y && !stopLight.GetComponent<TrafficLight> ().isGreen ()) {
-			} else if (!vertical && transform.position.x == wayPointList [1].position.x && !stopLight.GetComponent<TrafficLight> ().isGreen ()) {
+			if (vertical && transform.position.y == wayPointList [carIntersectPoint].position.y && !stopLight.GetComponent<TrafficLight> ().isGreen ()) {
+			} else if (!vertical && transform.position.x == wayPointList [carIntersectPoint].position.x && !stopLight.GetComponent<TrafficLight> ().isGreen ()) {
 			} else {
 				drive ();
 			}
@@ -55,13 +56,7 @@ public class CarMovement : MonoBehaviour {
 			targetWayPoint = wayPointList[currentWayPoint];
 		}
 	}
-
-	/*void OnTriggerEnter2D(Collider2D other) {
-		// For now explode on contact - TODO: later check type of collision
-		//Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
-		//Destroy (gameObject);
-
-	}*/
+		
 
 	void OnCollisionEnter2D(Collision2D coll){
 		Debug.Log ("Hit");

@@ -40,16 +40,10 @@ public class movement : MonoBehaviour
 					// Corner Waypoints must be aligned with the same x and y values
 					//Debug.Log("Checking Crossing");
 					if (wayPointList [currentWayPoint].transform.position.x == wayPointList [(currentWayPoint +1)%wayPointList.Length].transform.position.x) {
-						//Debug.Log ("Vertical Cross: ");
-						//Debug.Log ("Current pos: " + wayPointList [currentWayPoint].transform.position );
-						//Debug.Log ("Target pos: " + targetWayPoint.transform.position );
 						if (trafficController.verticalIsGreen ()) {
 							walk ();
 						}
 					} else if (wayPointList [currentWayPoint].transform.position.y == wayPointList [(currentWayPoint +1)%wayPointList.Length].transform.position.y) {
-						//Debug.Log ("Horizontal Cross: ");
-						//Debug.Log ("Current pos: " + wayPointList [currentWayPoint].transform.position );
-						//Debug.Log ("Target pos: " + targetWayPoint.transform.position );
 						if (trafficController.horizontalIsGreen ()) {
 							walk ();
 						}
