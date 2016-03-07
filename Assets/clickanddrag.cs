@@ -12,6 +12,7 @@ public class clickanddrag : MonoBehaviour
     public GameObject meteorExplosion;
     public GameObject meteorVisualization;
     public HeartAttack ha;
+	public GameObject TrafficController;
     public turnBerserk tb;
 	public DisplayDeathCounter deathCounter;
     private Vector3 originalSize;

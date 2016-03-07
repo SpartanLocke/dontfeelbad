@@ -10,7 +10,9 @@ public class TrafficLight : MonoBehaviour {
    	void Start()
     {
 		broken = false;
-     StartCoroutine(setLight());
+		//state = 0;
+		//GetComponent<Renderer> ().material.color = new Color (0, 1, 0);
+		StartCoroutine(setLight());
      
     }
 
