@@ -2,4 +2,5 @@ Library/*
 Temp/*
 dontfeelbad.sln
 dontfeelbad.CSharp.csproj
+Assembly-CSharp.csproj
 .vs/*
