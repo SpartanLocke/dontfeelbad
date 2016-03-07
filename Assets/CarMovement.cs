@@ -56,14 +56,14 @@ public class CarMovement : MonoBehaviour {
 		}
 	}
 
-	void OnTriggerEnter2D(Collider2D other) {
+	/*void OnTriggerEnter2D(Collider2D other) {
 		// For now explode on contact - TODO: later check type of collision
 		//Instantiate(explosion, gameObject.transform.position, Quaternion.identity);
 		//Destroy (gameObject);
 
-	}
-	/*void onCollisonEnter2d(Collision2D coll)
-	{
+	}*/
+
+	void OnCollisionEnter2D(Collision2D coll){
 		Debug.Log ("Hit");
 		if (coll.gameObject.tag == "car") {
 			Instantiate (explosion, gameObject.transform.position, Quaternion.identity);
@@ -71,5 +71,5 @@ public class CarMovement : MonoBehaviour {
 		} else {
 			Destroy (coll.gameObject);
 		}
-	}*/
+	}
 }
