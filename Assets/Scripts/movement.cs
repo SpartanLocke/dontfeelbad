@@ -152,7 +152,7 @@ public class movement : MonoBehaviour
             target.GetComponent<movement>().scaryMan = null;
         }
 		deathCounter.addScore (1);
-        GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().wilhelm();
+       //GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().wilhelm();
     }
 
     void hunt()
