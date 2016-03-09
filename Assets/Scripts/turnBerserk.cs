@@ -19,7 +19,7 @@ public class turnBerserk : MonoBehaviour
                 if (distanceSqr < radius)
                 {
                     man.GetComponent<movement>().setBerserk();
-                    GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().sparta();
+                    //GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().sparta();
                     return true;
                 }
             }

@@ -117,11 +117,13 @@ public class clickanddrag : MonoBehaviour
             if (!infected)
             {
                 moved = false;
+                dragging = false;
                 gameObject.transform.localScale = originalSize;
                 gameObject.transform.position = originalPos;
             }
             else
             {
+                Debug.Log("this happend");
                 Destroy(gameObject);
             }
         }
