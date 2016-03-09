@@ -56,16 +56,19 @@ public class clickanddrag : MonoBehaviour
     }
 
 	void OnCollisionEnter2D(Collision2D other) {
-		dragging = true;
-		//Debug.Log ("tag is: " + other.gameObject.tag);
-		if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && (gameObject.tag == "meteor" || gameObject.tag == "mine")) {
-			gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
-			gameObject.transform.localScale = originalSize * scale * 2;
-			//Debug.Log ("GREEN");
-		} else {
-			gameObject.GetComponent<SpriteRenderer> ().color = new Color (20, 0, 0, .75f);
-			gameObject.transform.localScale = originalSize * scale;
-			//Debug.Log ("RED");
+		Debug.Log (other.gameObject.name);
+		if(other.gameObject.tag != "explosion"){
+			dragging = true;
+			//Debug.Log ("tag is: " + other.gameObject.tag);
+			if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && (gameObject.tag == "meteor" || gameObject.tag == "mine")) {
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
+				gameObject.transform.localScale = originalSize * scale * 2;
+				//Debug.Log ("GREEN");
+			} else {
+				gameObject.GetComponent<SpriteRenderer> ().color = new Color (20, 0, 0, .75f);
+				gameObject.transform.localScale = originalSize * scale;
+				//Debug.Log ("RED");
+			}
 		}
 	}
 
