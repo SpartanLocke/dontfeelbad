@@ -11,12 +11,32 @@ public class movement : MonoBehaviour
     public float speed = 1f;
 	public DisplayDeathCounter deathCounter;
 
-	private TrafficController trafficController;
+    public bool attracted = false;
+    private GameObject attractiveMan;
+    public bool scared = false;
+    private GameObject scaryMan;
+    private GameObject target;
+
+    public float killRange = .1f;
+    public float gunRange = 2.0f;
+    public bool gun;
+    public float gunProb = .3f;
+    public bool berserk = false;
+    public float berserkSpeed = .5f;
+    public float scaredSpeed = .25f;
+
+    public BoxCollider2D physics;
+    public CircleCollider2D sight;
+
+    private TrafficController trafficController;
     // Use this for initialization
     void Start()
     {
-		GameObject trafficControl = GameObject.FindWithTag ("trafficController");
-		if(trafficControl){
+        Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(physics, GameObject.FindWithTag("man").GetComponent<Collider2D>());
+        giveGun();
+        GameObject trafficControl = GameObject.FindWithTag ("trafficController");
+		if( trafficControl != null ){
 			trafficController = trafficControl.GetComponent<TrafficController> ();
 		}
     }
@@ -24,8 +44,21 @@ public class movement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (berserk && target != null)
+        {
+            hunt();
+        }
+        else if (scared)
+        {
+            walkAway();
+        }
+        else if (attracted)
+        {
+
+        }
+
         // check if we have somewere to walk
-        if (currentWayPoint < this.wayPointList.Length)
+        else if (currentWayPoint < this.wayPointList.Length)
         {
             if (targetWayPoint == null) targetWayPoint = wayPointList[currentWayPoint];
 
@@ -78,8 +111,94 @@ public class movement : MonoBehaviour
         }
     }
 
-	void OnDestroy(){
+    void giveGun()
+    {
+        float num = Random.value;
+        if (num < gunProb)
+        {
+            gun = true;
+            killRange = gunRange;
+        }
+        else
+        {
+            gun = false;
+        }
+    }
+
+    void OnCollisionEnter2D(Collision2D coll)       //In order for this to work, must turn off isKinematic, must set the mass and gravity to zero, and fix all constraints on the rigidbody
+    {
+        if (coll.gameObject.tag == "car")
+        {
+            Destroy(gameObject);
+        }
+        else
+        {
+            if (coll.gameObject.tag == "man" && target == null)
+            {                
+                if (berserk)
+                { //make any man i run into while berserk scared of me
+                    target = coll.gameObject;
+                    target.GetComponent<movement>().setScared(gameObject);
+                }
+            }
+        }
+    }
+
+    void OnDestroy(){
 		// TODO: Score depends on person
+        if (berserk && target != null)
+        {
+            target.GetComponent<movement>().scared = false;
+            target.GetComponent<movement>().scaryMan = null;
+        }
 		deathCounter.addScore (1);
-	}
+        GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().wilhelm();
+    }
+
+    void hunt()
+    {
+        Vector3 dist = -transform.position + target.transform.position;
+        transform.Translate(berserkSpeed * dist.normalized);
+        if (dist.magnitude < killRange)
+        {
+            if (gun)
+            {
+                //shoot animation
+                Destroy(target);
+            }
+            else
+            {
+                //punch animation
+                Destroy(target);
+            }
+            
+        }
+    }
+
+    void walkAway()
+    {
+        transform.Translate(scaredSpeed * (transform.position - scaryMan.transform.position).normalized );
+    }
+
+    void walkTowards()
+    {
+        transform.position = Vector3.MoveTowards(transform.position, attractiveMan.transform.position, speed * Time.deltaTime);
+    }
+
+    public void setBerserk()
+    {
+        berserk = true;
+    }
+
+    void setScared(GameObject scary)
+    {
+        scared = true;
+        scaryMan = scary;
+    }
+
+    void setAttracted(GameObject attractive)
+    {
+        attracted = true;
+        attractiveMan = attractive;
+    }
 }
