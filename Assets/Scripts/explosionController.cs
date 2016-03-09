@@ -8,9 +8,13 @@ public class explosionController : MonoBehaviour {
 	private GameObject[] text;
 	private GameObject[] cars;
 	public float duration;
+	public int radius;
+	//TODO: Take in radius and then modify the circle collider radius on spawn
 	//public DisplayDeathCounter deathCounter;
 	// Use this for initialization
 	void Start () {
+		CircleCollider2D explosionCollider = gameObject.GetComponent<CircleCollider2D>();
+		explosionCollider.radius = radius;
 		men = GameObject.FindGameObjectsWithTag("man");
 		cars = GameObject.FindGameObjectsWithTag ("car");
 		StartCoroutine (explode ());
