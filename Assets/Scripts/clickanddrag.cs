@@ -73,11 +73,13 @@ public class clickanddrag : MonoBehaviour
 	}
 
 	void OnCollisionExit2D(Collision2D other) {
-		gameObject.GetComponent<SpriteRenderer> ().color = oldColor;
-		if (dragging) {
-			gameObject.transform.localScale = originalSize * scale;
-		} else {
-			gameObject.transform.localScale = originalSize;
+		if (other.gameObject.tag != "explosion") {
+			gameObject.GetComponent<SpriteRenderer> ().color = oldColor;
+			if (dragging) {
+				gameObject.transform.localScale = originalSize * scale;
+			} else {
+				gameObject.transform.localScale = originalSize;
+			}
 		}
 	}
 
