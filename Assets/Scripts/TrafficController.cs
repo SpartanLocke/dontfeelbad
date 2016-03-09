@@ -34,4 +34,16 @@ public class TrafficController : MonoBehaviour {
 		}
 	}
 
+	public void breakAllLights()
+	{
+		foreach(GameObject light in verticalLight)
+		{
+			light.GetComponent<TrafficLight> ().breakLight ();
+		}
+		foreach(GameObject light in horizontalLight)
+		{
+			light.GetComponent<TrafficLight> ().breakLight ();
+		}
+	}
+
 }

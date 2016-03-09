@@ -20,7 +20,6 @@ public class turnBerserk : MonoBehaviour
                 {
                     man.GetComponent<movement>().setBerserk();
                     GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().sparta();
-
                     return true;
                 }
             }

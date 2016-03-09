@@ -12,7 +12,7 @@ public class TrafficLight : MonoBehaviour {
 		broken = false;
 		//state = 0;
 		//GetComponent<Renderer> ().material.color = new Color (0, 1, 0);
-		StartCoroutine(setLight());
+		StartCoroutine("setLight");
      
     }
 
@@ -31,7 +31,7 @@ public class TrafficLight : MonoBehaviour {
 	public void breakLight()
 	{
 		broken = true;
-		StopCoroutine (setLight ());
+		StopCoroutine ("setLight");
 		// if light is broken - permanently green
 		state = 0;
 		GetComponent<Renderer> ().material.color = new Color (0, 1, 0);
