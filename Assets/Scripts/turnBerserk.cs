@@ -18,7 +18,7 @@ public class turnBerserk : MonoBehaviour
                 float distanceSqr = (point - man.transform.position).sqrMagnitude;
                 if (distanceSqr < radius)
                 {
-                    man.GetComponent<shooter>().berserk = true;
+                    //man.GetComponent<shooter>().berserk = true;
                     Instantiate(BrokenHeart, point, Quaternion.identity);
                     
                     return true;
