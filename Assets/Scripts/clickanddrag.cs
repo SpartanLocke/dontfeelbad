@@ -19,11 +19,15 @@ public class clickanddrag : MonoBehaviour
     private Vector3 originalPos;
     public Vector3 point;
     private bool moved = false;
+	private bool dragging = false;
+
+	private Color oldColor;
 
 
     void Start()
     {
         originalPos = gameObject.transform.position;
+		oldColor = gameObject.GetComponent<SpriteRenderer> ().color;
     }
 
     void OnMouseDown()
@@ -49,8 +53,34 @@ public class clickanddrag : MonoBehaviour
             gameObject.transform.position = point;
             
         }
-
     }
+
+	void OnCollisionEnter2D(Collision2D other) {
+		dragging = true;
+		//Debug.Log ("tag is: " + other.gameObject.tag);
+		if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && (gameObject.tag == "meteor" || gameObject.tag == "mine")) {
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
+			gameObject.transform.localScale = originalSize * scale * 2;
+			//Debug.Log ("GREEN");
+		} else {
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color (20, 0, 0, .75f);
+			gameObject.transform.localScale = originalSize * scale;
+			//Debug.Log ("RED");
+		}
+	}
+
+	void OnCollisionExit2D(Collision2D other) {
+		gameObject.GetComponent<SpriteRenderer> ().color = oldColor;
+		if (dragging) {
+			gameObject.transform.localScale = originalSize * scale;
+		} else {
+			gameObject.transform.localScale = originalSize;
+		}
+	}
+
+	void OnTriggerEnter2D() {
+		//Debug.Log("trigger");
+	}
 
     void OnMouseUp()
     {
@@ -71,6 +101,7 @@ public class clickanddrag : MonoBehaviour
             {
                 //MOVE BACK TO ORIGINAL SPOT
                 moved = false;
+				dragging = false;
                 gameObject.transform.localScale = originalSize;
                 gameObject.transform.position = originalPos;
             }
