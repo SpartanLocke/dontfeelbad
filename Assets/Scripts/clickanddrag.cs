@@ -106,7 +106,7 @@ public class clickanddrag : MonoBehaviour
 		else if (gameObject.tag == "trafficTrap")
 		{
 
-			//Destroy(gameObject);
+			Destroy(gameObject);
 			trafficController.breakAllLights ();
 			//transform.position = point;
 		}

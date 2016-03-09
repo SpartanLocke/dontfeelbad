@@ -4,9 +4,7 @@ using UnityEngine.UI;
 
 public class explosionController : MonoBehaviour {
 
-	private GameObject[] men;
 	private GameObject[] text;
-	private GameObject[] cars;
 	public float duration;
 	public int radius;
 	//TODO: Take in radius and then modify the circle collider radius on spawn
@@ -15,8 +13,6 @@ public class explosionController : MonoBehaviour {
 	void Start () {
 		CircleCollider2D explosionCollider = gameObject.GetComponent<CircleCollider2D>();
 		explosionCollider.radius = radius;
-		men = GameObject.FindGameObjectsWithTag("man");
-		cars = GameObject.FindGameObjectsWithTag ("car");
 		StartCoroutine (explode ());
 	}
 	
