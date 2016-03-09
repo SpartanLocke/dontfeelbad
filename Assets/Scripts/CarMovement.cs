@@ -10,6 +10,7 @@ public class CarMovement : MonoBehaviour {
 	Transform targetWayPoint;
 	public GameObject stopLight;
 	public GameObject explosion;
+	public DisplayDeathCounter deathCounter;
 
 	public float speed = 1f;
 
@@ -57,6 +58,9 @@ public class CarMovement : MonoBehaviour {
 		}
 	}
 		
+	void OnDestroy() {
+		deathCounter.addScore (1);
+	}
 
 	void OnCollisionEnter2D(Collision2D coll){
 		//Debug.Log ("Car COLLIDED");

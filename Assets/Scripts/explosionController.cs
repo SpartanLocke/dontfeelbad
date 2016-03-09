@@ -24,13 +24,7 @@ public class explosionController : MonoBehaviour {
 	void OnCollisionEnter2D(Collision2D other){
 		Debug.Log ("Explosion");
 		if (other.gameObject.tag == "man" || other.gameObject.tag == "car") {
-			text = GameObject.FindGameObjectsWithTag("deathCount");
-			foreach (GameObject texts in text) {
-				if (texts != null) {
-					DisplayDeathCounter deathCounter = (DisplayDeathCounter)texts.GetComponent (typeof(DisplayDeathCounter));
-					deathCounter.addScore (1);
-				}
-			}
+			
 			Destroy (other.gameObject);
 		}
 	}
