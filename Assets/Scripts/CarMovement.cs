@@ -63,7 +63,9 @@ public class CarMovement : MonoBehaviour {
 			Instantiate (explosion, gameObject.transform.position, Quaternion.identity);
 			Destroy (gameObject);
 		} else {
-			Destroy (coll.gameObject);
+			if (coll.gameObject.tag == "man") {
+				Destroy (coll.gameObject);
+			}
 		}
 	}
 }
