@@ -12,7 +12,7 @@ public class clickanddrag : MonoBehaviour
     public GameObject meteorExplosion;
     public GameObject meteorVisualization;
     public HeartAttack ha;
-	public GameObject TrafficController;
+	public TrafficController trafficController;
     public turnBerserk tb;
 	public DisplayDeathCounter deathCounter;
     private Vector3 originalSize;
@@ -103,6 +103,13 @@ public class clickanddrag : MonoBehaviour
             Instantiate(landMine, point, Quaternion.identity);
             //transform.position = point;
         }
+		else if (gameObject.tag == "trafficTrap")
+		{
+
+			//Destroy(gameObject);
+			trafficController.breakAllLights ();
+			//transform.position = point;
+		}
        
     }
 }
