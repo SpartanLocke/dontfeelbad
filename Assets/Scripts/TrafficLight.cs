@@ -3,7 +3,6 @@ using System.Collections;
 
 public class TrafficLight : MonoBehaviour {
 
-    
 	public bool northSouth;
 	private bool broken;
 	private int state = 0;
