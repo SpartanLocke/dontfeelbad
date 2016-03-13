@@ -10,7 +10,6 @@ public class state : MonoBehaviour {
 	public GameObject upset_state;
 	public GameObject berserk_state;
 	public GameObject scared_state;
-	GameObject stateObj = new GameObject ();
 
 //TODO, fix jenky, load all states to only load the state we need and the sprite we need, empty that single gameObject
 //currently doesnt free up old states
@@ -19,10 +18,11 @@ public class state : MonoBehaviour {
 	void Start () {
 		current_state = "normal";
 		if (current_state == "normal") {
-			//GameObject stateObj = new GameObject ();
+			GameObject stateObj = new GameObject ();
 			stateObj = (GameObject) Instantiate (happy_state, gameObject.transform.position, Quaternion.identity);
-			stateObj.transform.parent = gameObject.transform;
-			stateObj.transform.localScale = new Vector3(2,2,1);
+			stateObj.transform.parent = gameObject.transform.parent.transform;
+			//stateObj.transform.localScale = new Vector3(2,2,1);
+			stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, -1);
 		}
 	}
 	
@@ -36,44 +36,46 @@ public class state : MonoBehaviour {
 
 		if (scared && current_state != "scared") {
 			//GameObject stateObj = new GameObject ();
+			GameObject [] states = GameObject.FindGameObjectsWithTag("state");
+			foreach(GameObject state in states){
+				if (state.transform.parent == gameObject.transform.parent) {
+					Destroy (state);
+				}
+			}
+			GameObject stateObj = new GameObject ();
 			stateObj = (GameObject)Instantiate (scared_state, gameObject.transform.position, Quaternion.identity);
-			stateObj.transform.parent = gameObject.transform;
-			stateObj.transform.localScale = new Vector3(2,2,1);
+			stateObj.transform.parent = gameObject.transform.parent;
+			stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, -1);
+			//stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, 5);
 			current_state = "scared";
 		} else if (berserk && current_state != "berserk") {
 			//GameObject stateObj = new GameObject ();
+			GameObject [] states = GameObject.FindGameObjectsWithTag("state");
+			foreach(GameObject state in states){
+				if (state.transform.parent == gameObject.transform.parent) {
+					Destroy (state);
+				}
+			}
+			GameObject stateObj = new GameObject ();
 			stateObj = (GameObject)Instantiate (berserk_state, gameObject.transform.position, Quaternion.identity);
-			stateObj.transform.parent = gameObject.transform;
-			stateObj.transform.localScale = new Vector3(2,2,1);
+			stateObj.transform.parent = gameObject.transform.parent;
+			stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, -1);
+			//stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, 5);
 			current_state = "berserk";
 		} else if (!scared && !berserk && current_state != "normal") {
 			//GameObject stateObj = new GameObject ();
+			GameObject [] states = GameObject.FindGameObjectsWithTag("state");
+			foreach(GameObject state in states){
+				if (state.transform.parent == gameObject.transform.parent) {
+					Destroy (state);
+				}
+			}
+			GameObject stateObj = new GameObject ();
 			stateObj = (GameObject)Instantiate (happy_state, gameObject.transform.position, Quaternion.identity);
-			stateObj.transform.parent = gameObject.transform;
-			stateObj.transform.localScale = new Vector3(2,2,1);
+			stateObj.transform.parent = gameObject.transform.parent;
+			stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, -1);
+			//stateObj.transform.position = stateObj.transform.position + new Vector3 (0, 0, 5);
 			current_state = "normal";
 		}
-
-		/*
-		if (changed) {
-			GameObject stateObj = new GameObject ();
-			if (current_state == "normal") {
-				stateObj = (GameObject) Instantiate (happy, gameObject.transform.position, Quaternion.identity);
-				stateObj.transform.parent = gameObject.transform;
-			}
-			if (current_state == "sad") {
-				stateObj = (GameObject) Instantiate (upset, gameObject.transform.position, Quaternion.identity);
-				stateObj.transform.parent = gameObject.transform;
-			}
-
-			changed = false;
-		}*/
 	}
-
-	/*
-	//valid params are currently 'normal', 'sad'
-	public void changeState(string newState) {
-		current_state = newState;
-		changed = true;
-	}*/
 }
