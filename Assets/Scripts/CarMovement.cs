@@ -66,11 +66,14 @@ public class CarMovement : MonoBehaviour {
 		//Debug.Log ("Car COLLIDED");
 		if (coll.gameObject.tag == "car") {
 			Instantiate (explosion, gameObject.transform.position, Quaternion.identity);
-			Destroy (gameObject);
-		} else {
-			if (coll.gameObject.tag == "man") {
-				Destroy (coll.gameObject);
-			}
+			//Destroy (gameObject);
 		}
+        else if(coll.gameObject.tag == "man")
+        {     
+            if (coll.collider == coll.gameObject.GetComponent<BoxCollider2D>())
+            {
+                Destroy(coll.gameObject);
+            }
+        }
 	}
 }

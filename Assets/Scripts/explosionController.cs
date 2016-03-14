@@ -48,13 +48,20 @@ public class explosionController : MonoBehaviour {
         }
     }
 
-	void OnCollisionEnter2D(Collision2D other){
+	void OnCollisionEnter2D(Collision2D coll){
 		Debug.Log ("Explosion");
-		if (other.gameObject.tag == "man" || other.gameObject.tag == "car") {
+		if (coll.gameObject.tag == "car") {
 			
-			Destroy (other.gameObject);
+			Destroy (coll.gameObject);
 		}
-	}
+        else if (coll.gameObject.tag == "man")
+        {
+            if (coll.collider == coll.gameObject.GetComponent<BoxCollider2D>())
+            {
+                Destroy(coll.gameObject);
+            }
+        }
+    }
 	IEnumerator explode()
 	{
         //new WaitForSeconds (delay);

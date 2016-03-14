@@ -31,8 +31,8 @@ public class state : MonoBehaviour {
 		//
 		bool scared = gameObject.GetComponentInParent<movement>().scared;
 		bool berserk = gameObject.GetComponentInParent<movement>().berserk;
-		Debug.Log ("scared: " + scared);
-		Debug.Log ("berserk: " + berserk);
+		//Debug.Log ("scared: " + scared);
+		//Debug.Log ("berserk: " + berserk);
 
 		if (scared && current_state != "scared") {
 			//GameObject stateObj = new GameObject ();

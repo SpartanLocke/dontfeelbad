@@ -134,23 +134,28 @@ public class movement : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)       //In order for this to work, must turn off isKinematic, must set the mass and gravity to zero, and fix all constraints on the rigidbody
     {
-        if (coll.gameObject.tag == "car")
+        if (coll.gameObject.tag == "man" && berserk)   //coll.gameObject.tag == "man" && target == null
         {
-            Destroy(gameObject);
-        }
-        else
-        {
-            if (coll.gameObject.tag == "man" && berserk)   //coll.gameObject.tag == "man" && target == null
-            {
-                coll.gameObject.GetComponent<movement>().setScared(gameObject);
-                if (target == null)         //if berserk
-                { //make any man i run into while berserk scared of me
-                    target = coll.gameObject;
-                    //target.GetComponent<movement>().setScared(gameObject);
-                }
+            coll.gameObject.GetComponent<movement>().setScared(gameObject);
+            if (target == null)         //if berserk
+            { //make any man i run into while berserk scared of me
+                target = coll.gameObject;
+                //target.GetComponent<movement>().setScared(gameObject);
             }
         }
     }
+
+
+    /*void OnTriggerEnter2D(Collider2D other)
+    {
+        Debug.Log("i should have died");
+        if (other.tag != "man")
+        {
+            Debug.Log("i should have died");
+            Destroy(gameObject);
+        }
+        
+    }*/
 
     void OnDestroy(){
 		// TODO: Score depends on person
