@@ -69,8 +69,12 @@ public class CarMovement : MonoBehaviour {
 			Destroy (gameObject);
 
 		} else {
-			if (coll.gameObject.tag == "man") {
-				Destroy (coll.gameObject);
+			if (coll.gameObject.tag == "man")
+            {
+                if (coll.collider == coll.gameObject.GetComponent<BoxCollider2D>())
+                {
+                    Destroy(coll.gameObject);
+                }
 			}
 		}
 	}
