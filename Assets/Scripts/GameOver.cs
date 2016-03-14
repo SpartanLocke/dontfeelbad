@@ -32,9 +32,9 @@ public class GameOver : MonoBehaviour {
 			if (trapArray.Length <= 1) {
 				StartCoroutine ("EndGame");
 			} else if (menArray != null) {
-				Debug.Log ("There are " + menArray.Length + "people left");
 				if (menArray.Length < 1) {
-					StartCoroutine ("EndGame");
+					finalDeathCount = deathCounter.getScore ();
+					Application.LoadLevel("EndScreen");
 				}
 			}
 		}
