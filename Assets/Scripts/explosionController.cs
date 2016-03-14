@@ -22,13 +22,14 @@ public class explosionController : MonoBehaviour {
         //gameObject.GetComponent<SpriteRenderer>().enabled = false;
 
         explosionCollider.radius = radius;
-		StartCoroutine (explode ());
+		
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if (size < 1.0f)
         {
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, .3f);
             size = size + 1 / numFrames1;
             //Debug.Log(size);
             gameObject.transform.localScale = Vector3.Lerp(maxScale, new Vector3(1, 1, 1), size);
@@ -37,6 +38,7 @@ public class explosionController : MonoBehaviour {
         {
             if (counter < numFrames2)
             {
+                gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, .7f);
                 gameObject.GetComponent<SpriteRenderer>().color = new Color(114,46,61,.2f);
                 gameObject.GetComponent<CircleCollider2D>().enabled = true;
                 counter++;
@@ -62,15 +64,5 @@ public class explosionController : MonoBehaviour {
             }
         }
     }
-	IEnumerator explode()
-	{
-        //new WaitForSeconds (delay);
-        gameObject.transform.localScale = Vector3.Lerp(maxScale, new Vector3(1, 1, 1), .5f);
-        //gameObject.GetComponent<CircleCollider2D>().enabled = true;
-        //gameObject.GetComponent<SpriteRenderer>().enabled = true;
-        yield return new WaitForSeconds(duration);
-		//Destroy (gameObject);
-        //yield return null;
-
-    }
+	
 }
