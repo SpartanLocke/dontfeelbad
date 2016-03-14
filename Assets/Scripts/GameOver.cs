@@ -9,6 +9,8 @@ public class GameOver : MonoBehaviour {
 	//public GameObject men;
 	public GameObject cars;
 	public GameObject endGameScreen;
+	public static int finalDeathCount;
+	public DisplayDeathCounter deathCounter;
 
 	private bool endingGame;
 	// Use this for initialization
@@ -47,6 +49,7 @@ public class GameOver : MonoBehaviour {
 			yield return new WaitForSeconds (1);
 		}
 		// Load an End Game Screen or whatever here
+		finalDeathCount = deathCounter.getScore();
 		Application.LoadLevel ("EndScreen");
 
 	}

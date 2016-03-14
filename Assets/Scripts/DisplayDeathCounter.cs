@@ -21,4 +21,9 @@ public class DisplayDeathCounter : MonoBehaviour {
 	{
 		deathCount += i;
 	}
+
+	public int getScore()
+	{
+		return deathCount;
+	}
 }
