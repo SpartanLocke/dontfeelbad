@@ -53,21 +53,37 @@ public class clickanddrag : MonoBehaviour
             gameObject.transform.position = point;
             
         }
+		Debug.Log ("DRAGGING MODE");
+		if (gameObject.tag == "meteor" || gameObject.tag == "trafficTrap") {
+			//for now, make it green whereever
+			//TODO, limit by where i can place the meteor
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 128, 0, .75f);
+		} else {
+			/*
+			//otherwise, gray for everything else
+			gameObject.GetComponent<SpriteRenderer> ().color = new Color (128, 128, 0, .75f);
+			Debug.Log ("GRAY HOVER");
+			*/
+		}
+		//gameObject.transform.localScale = originalSize * scale;
     }
 
 	void OnCollisionEnter2D(Collision2D other) {
 		Debug.Log (other.gameObject.name);
-		if(other.gameObject.tag != "explosion"){
+		if (other.gameObject.tag != "explosion"){
 			dragging = true;
 			//Debug.Log ("tag is: " + other.gameObject.tag);
-			if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && (gameObject.tag == "meteor" || gameObject.tag == "mine")) {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
-				gameObject.transform.localScale = originalSize * scale * 2;
-				//Debug.Log ("GREEN");
-			} else {
-				gameObject.GetComponent<SpriteRenderer> ().color = new Color (20, 0, 0, .75f);
-				gameObject.transform.localScale = originalSize * scale;
-				//Debug.Log ("RED");
+			if (gameObject.tag != "meteor") {
+				if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && gameObject.tag == "mine") {
+					//gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
+					gameObject.transform.localScale = originalSize * scale * 2;
+					//Debug.Log ("GREEN");
+				} else {
+					//gameObject.GetComponent<SpriteRenderer> ().color = new Color (128, 128, 128, .75f);
+					gameObject.transform.localScale = originalSize * scale;
+					//Debug.Log ("GRAY");
+					//Debug.Log("GRAY COLLIDE");
+				}
 			}
 		}
 	}
