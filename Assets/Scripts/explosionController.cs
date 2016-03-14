@@ -30,7 +30,7 @@ public class explosionController : MonoBehaviour {
         if (size < 1.0f)
         {
             size = size + 1 / numFrames1;
-            Debug.Log(size);
+            //Debug.Log(size);
             gameObject.transform.localScale = Vector3.Lerp(maxScale, new Vector3(1, 1, 1), size);
         }
         else

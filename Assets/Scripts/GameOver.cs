@@ -6,7 +6,7 @@ public class GameOver : MonoBehaviour {
 
 	public GameObject traps;
 	public Text GameEndTimer;
-	public GameObject men;
+	//public GameObject men;
 	public GameObject cars;
 	public GameObject endGameScreen;
 
@@ -22,28 +22,17 @@ public class GameOver : MonoBehaviour {
 		// If there are none, there should be 1 transform in the child
 		if (!endingGame) {
 			Transform[] trapArray = traps.GetComponentsInChildren<Transform> ();
-			Transform[] menArray;
-			Transform[] carArray;
-			if (men == null)
-				menArray = null;
-			else
-				menArray = traps.GetComponentsInChildren<Transform> ();
-			if (cars == null)
-				carArray = null;
-			else
-				carArray = cars.GetComponentsInChildren<Transform> ();
-			// End the Game if there are no traps left, or if all men and cars died
+			GameObject[] menArray;
+			//Transform[] carArray;
+			menArray = GameObject.FindGameObjectsWithTag("man");
+			Debug.Log ("There are " + trapArray.Length + " traps left.");
+			// End the Game if there are no traps left, or if all men  died
 			if (trapArray.Length <= 1) {
 				StartCoroutine ("EndGame");
 			} else if (menArray != null) {
-				if (menArray.Length <= 1) {
-					if (carArray != null) {
-						if (carArray.Length <= 1) {
-							StartCoroutine ("EndGame");
-						}
-					} else {
-						StartCoroutine ("EndGame");
-					}
+				Debug.Log ("There are " + menArray.Length + "people left");
+				if (menArray.Length < 1) {
+					StartCoroutine ("EndGame");
 				}
 			}
 		}
