@@ -117,7 +117,6 @@ public class clickanddrag : MonoBehaviour
             bool killed = ha.activate(point);
             if (killed)
             {
-                deathCounter.addScore(1);
                 Destroy(gameObject);
 
 

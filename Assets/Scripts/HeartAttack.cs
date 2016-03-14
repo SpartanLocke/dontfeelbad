@@ -19,7 +19,6 @@ public class HeartAttack : MonoBehaviour {
                 {
                     Destroy(man);
                     Instantiate(BrokenHeart, point, Quaternion.identity);
-                    Debug.Log("man died from heart attack");
                     return true;
                 }
             }
