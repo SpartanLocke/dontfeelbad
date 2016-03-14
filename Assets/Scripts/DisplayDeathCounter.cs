@@ -9,13 +9,13 @@ public class DisplayDeathCounter : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		deathCounterText.text="Death Counter : " + deathCount;
+		deathCounterText.text="" + deathCount;
 		deathCount = 0;
 	}
 
 	// Update is called once per frame
 	void Update () {
-		deathCounterText.text="Death Counter : " + deathCount;
+		deathCounterText.text="" + deathCount;
 	}
 	public void addScore(int i)
 	{

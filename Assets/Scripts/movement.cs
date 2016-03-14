@@ -146,11 +146,14 @@ public class movement : MonoBehaviour
     }
 
     void OnDestroy(){
-		// TODO: Score depends on person
-        if (berserk && target != null)
+        if (berserk)
         {
-            target.GetComponent<movement>().scared = false;
-            target.GetComponent<movement>().scaryMan = null;
+            GameObject[] men = GameObject.FindGameObjectsWithTag("man");
+            foreach (GameObject man in men)
+            {
+                man.GetComponent<movement>().scared = false;
+                man.GetComponent<movement>().scaryMan = null;
+            }
         }
 		deathCounter.addScore (1);
         GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().wilhelm();

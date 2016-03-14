@@ -59,7 +59,7 @@ public class CarMovement : MonoBehaviour {
 	}
 		
 	void OnDestroy() {
-		//deathCounter.addScore (1);
+		deathCounter.addScore (1);
 	}
 
 	void OnCollisionEnter2D(Collision2D coll){

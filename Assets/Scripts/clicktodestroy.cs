@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Retry : MonoBehaviour {
+public class clicktodestroy : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,10 +12,8 @@ public class Retry : MonoBehaviour {
 	void Update () {
 	
 	}
-
-	public void restart()
-	{
-		//Application.LoadLevel (Application.loadedLevel);
-		Application.LoadLevel ("main");
-	}
+    void OnMouseDown()
+    {
+        Destroy(gameObject);
+    }
 }
