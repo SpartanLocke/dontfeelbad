@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class Retry : MonoBehaviour {
+public class QuitGame : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,9 +13,7 @@ public class Retry : MonoBehaviour {
 	
 	}
 
-	void OnMouseUp()
-	{
-		//Application.LoadLevel (Application.loadedLevel);
-		Application.LoadLevel ("main");
+	void OnMouseUp(){
+		Application.LoadLevel ("StartScreen");
 	}
 }

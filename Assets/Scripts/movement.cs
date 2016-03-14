@@ -38,7 +38,7 @@ public class movement : MonoBehaviour
     {
         leftOrRight = Random.value;
         
-    Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
+    //Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
         Physics2D.IgnoreCollision(physics, GameObject.FindWithTag("man").GetComponent<Collider2D>());
         giveGun();
         GameObject trafficControl = GameObject.FindWithTag ("trafficController");
