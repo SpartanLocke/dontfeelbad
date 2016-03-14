@@ -38,7 +38,7 @@ public class movement : MonoBehaviour
     {
         leftOrRight = Random.value;
         
-    //Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
+    	Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
         Physics2D.IgnoreCollision(physics, GameObject.FindWithTag("man").GetComponent<Collider2D>());
         giveGun();
         GameObject trafficControl = GameObject.FindWithTag ("trafficController");
@@ -72,7 +72,7 @@ public class movement : MonoBehaviour
 			// If we are not at a corner, walk to the next waypoint
 			// This assumes people will only cross the street at corners
 			// If they cross the street somewhere else they can get hit by a car still
-			if (!(wayPointList [currentWayPoint].tag == "corner")) {
+			if (!(wayPointList [currentWayPoint].tag == "corner")||targetWayPoint.tag != "corner") {
 				walk ();
 			}
 			else{
