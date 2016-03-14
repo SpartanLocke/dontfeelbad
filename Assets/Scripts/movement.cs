@@ -23,7 +23,11 @@ public class movement : MonoBehaviour
     public float gunProb = .3f;
     public bool berserk = false;
     public float berserkSpeed = .5f;
-    public float scaredSpeed = .25f;
+    public float scaredSpeed = .3f;
+    public float safeDist = 0.0001f;
+    public float rRange;
+    public float leftOrRight;
+    
 
     public BoxCollider2D physics;
     public CircleCollider2D sight;
@@ -32,7 +36,9 @@ public class movement : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
+        leftOrRight = Random.value;
+        
+    Physics2D.IgnoreCollision(sight, GameObject.FindWithTag("car").GetComponent<Collider2D>());
         Physics2D.IgnoreCollision(physics, GameObject.FindWithTag("man").GetComponent<Collider2D>());
         giveGun();
         GameObject trafficControl = GameObject.FindWithTag ("trafficController");
@@ -50,6 +56,7 @@ public class movement : MonoBehaviour
         }
         else if (scared)
         {
+            checkDist();
             walkAway();
         }
         else if (attracted)
@@ -133,12 +140,13 @@ public class movement : MonoBehaviour
         }
         else
         {
-            if (coll.gameObject.tag == "man" && target == null)
-            {                
-                if (berserk)
+            if (coll.gameObject.tag == "man" && berserk)   //coll.gameObject.tag == "man" && target == null
+            {
+                coll.gameObject.GetComponent<movement>().setScared(gameObject);
+                if (target == null)         //if berserk
                 { //make any man i run into while berserk scared of me
                     target = coll.gameObject;
-                    target.GetComponent<movement>().setScared(gameObject);
+                    //target.GetComponent<movement>().setScared(gameObject);
                 }
             }
         }
@@ -177,12 +185,32 @@ public class movement : MonoBehaviour
 
     void walkAway()
     {
-        transform.Translate(scaredSpeed * (transform.position - scaryMan.transform.position).normalized );
+        Vector3 direction = scaredSpeed * (transform.position - scaryMan.transform.position).normalized;
+        Vector3 rand = new Vector3(Random.Range(-rRange, rRange), Random.Range(-rRange, rRange),0);
+        Quaternion rotation;
+        if (leftOrRight < .5f)
+        {
+            rotation = Quaternion.Euler(0, 0, Random.Range(0, rRange));
+        }
+        else {
+            rotation = Quaternion.Euler(0, 0, Random.Range(-rRange, 0));
+        }
+        transform.Translate(rotation*direction );
     }
 
     void walkTowards()
     {
         transform.position = Vector3.MoveTowards(transform.position, attractiveMan.transform.position, speed * Time.deltaTime);
+    }
+
+    void checkDist()
+    {
+        Vector3 dist = gameObject.transform.position - scaryMan.transform.position;
+        Debug.Log(dist.magnitude);
+        if (dist.magnitude > safeDist)
+        {
+            setNormal();
+        }
     }
 
     public void setBerserk()
@@ -194,6 +222,12 @@ public class movement : MonoBehaviour
     {
         scared = true;
         scaryMan = scary;
+    }
+
+    void setNormal()
+    {
+        scared = false;
+        scaryMan = null;
     }
 
     void setAttracted(GameObject attractive)
