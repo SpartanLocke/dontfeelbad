@@ -14,7 +14,6 @@ public class clickanddrag : MonoBehaviour
     public HeartAttack ha;
 	public TrafficController trafficController;
     public turnBerserk tb;
-	public DisplayDeathCounter deathCounter;
     private Vector3 originalSize;
     private Vector3 originalPos;
     public Vector3 point;
@@ -127,7 +126,7 @@ public class clickanddrag : MonoBehaviour
             bool killed = ha.activate(point);
             if (killed)
             {
-                deathCounter.addScore(1);
+                
                 Destroy(gameObject);
 
 
