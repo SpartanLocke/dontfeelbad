@@ -13,6 +13,12 @@ public class Retry : MonoBehaviour {
 	
 	}
 
+    void OnMouseUp()
+    {
+        Application.LoadLevel("main");
+    }
+
+
 	public void restart()
 	{
 		//Application.LoadLevel (Application.loadedLevel);
