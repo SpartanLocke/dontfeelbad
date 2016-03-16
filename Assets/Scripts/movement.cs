@@ -202,7 +202,7 @@ public class movement : MonoBehaviour
     void checkDist()
     {
         Vector3 dist = gameObject.transform.position - scaryMan.transform.position;
-        Debug.Log(dist.magnitude);
+        //Debug.Log(dist.magnitude);
         if (dist.magnitude > safeDist)
         {
             setNormal();
