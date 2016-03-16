@@ -22,4 +22,8 @@ public class soundManager : MonoBehaviour {
     {
         sounds[0].Play();
     }
+    public void explode()
+    {
+        sounds[2].Play();
+    }
 }

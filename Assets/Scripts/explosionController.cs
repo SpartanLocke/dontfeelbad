@@ -45,6 +45,7 @@ public class explosionController : MonoBehaviour {
             }
             else
             {
+                GameObject.FindGameObjectWithTag("soundManager").GetComponent<soundManager>().explode();
                 Destroy(gameObject);
             }
         }
