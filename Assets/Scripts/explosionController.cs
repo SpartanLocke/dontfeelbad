@@ -8,7 +8,9 @@ public class explosionController : MonoBehaviour {
 	public float duration;
     public float delay;
     public Vector3 maxScale;
-	public float radius;
+    public Vector3 minScale;
+
+    public float radius;
     public float numFrames1;
     public float numFrames2;
     private float size = 0;
@@ -32,7 +34,7 @@ public class explosionController : MonoBehaviour {
             gameObject.GetComponent<SpriteRenderer>().color = new Color(0, 0, 0, .3f);
             size = size + 1 / numFrames1;
             //Debug.Log(size);
-            gameObject.transform.localScale = Vector3.Lerp(maxScale, new Vector3(1, 1, 1), size);
+            gameObject.transform.localScale = Vector3.Lerp(maxScale, minScale, size);
         }
         else
         {

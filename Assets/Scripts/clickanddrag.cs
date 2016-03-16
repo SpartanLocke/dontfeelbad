@@ -21,8 +21,10 @@ public class clickanddrag : MonoBehaviour
 	private bool dragging = false;
 	public Text tutorialText;
 	public Text tutorialText2;
+    public GameObject tutorialBg;
 
 	private Color oldColor;
+    private int dragNum = 0;
 
 
     void Start()
@@ -30,7 +32,10 @@ public class clickanddrag : MonoBehaviour
         originalPos = gameObject.transform.position;
 		oldColor = gameObject.GetComponent<SpriteRenderer> ().color;
 		tutorialText = GameObject.Find("tutorialText").GetComponent<Text>();
-		tutorialText2 = GameObject.Find("tutorialText2").GetComponent<Text>();
+        tutorialText2 = GameObject.Find("tutorialText2").GetComponent<Text>();
+        //tutorialBg = GameObject.FindGameObjectWithTag("tutorialBg").GetComponent<Image>();
+
+        tutorialBg = GameObject.FindGameObjectWithTag("tutorialBg");
     }
 
     void OnMouseDown()
@@ -57,8 +62,12 @@ public class clickanddrag : MonoBehaviour
             
         }
 		Debug.Log ("DRAGGING MODE");
-		tutorialText.text = "Now drag the trap onto something it can be used on!";
-		tutorialText2.text = "Now drag the trap onto something it can be used on!";
+        if (dragNum == 0)
+        {
+            tutorialText.text = "Now drag the trap onto something it can be used on!";
+            //tutorialBg.enabled = true;
+            tutorialText2.text = "Now drag the trap onto something it can be used on!";
+        }
 
 		if (gameObject.tag == "meteor" || gameObject.tag == "trafficTrap") {
 			//for now, make it green whereever
@@ -121,7 +130,8 @@ public class clickanddrag : MonoBehaviour
         if (gameObject.tag == "heartattack") //TODO: move this logic outside
         {
 			tutorialText.text = "";
-			tutorialText2.text = "";
+            tutorialBg.SetActive(false);
+            tutorialText2.text = "";
 
             bool killed = ha.activate(point);
             if (killed)
@@ -143,7 +153,9 @@ public class clickanddrag : MonoBehaviour
         else if (gameObject.tag == "shooter") 
         {
 			tutorialText.text = "";
-			tutorialText2.text = "";
+            tutorialBg.SetActive(false);
+
+            tutorialText2.text = "";
 
             bool infected = tb.activate(point);
             if (!infected)
@@ -162,7 +174,9 @@ public class clickanddrag : MonoBehaviour
         else if (gameObject.tag == "meteor")
         {
 			tutorialText.text = "";
-			tutorialText2.text = "";
+            tutorialBg.SetActive(false);
+
+            tutorialText2.text = "";
 
             Destroy(gameObject);
             Instantiate(meteorExplosion, point, Quaternion.identity);
@@ -172,7 +186,8 @@ public class clickanddrag : MonoBehaviour
         else if (gameObject.tag == "mine")
         {
 			tutorialText.text = "";
-			tutorialText2.text = "";
+            tutorialBg.SetActive(false);
+            tutorialText2.text = "";
 
 
             Destroy(gameObject);
@@ -182,9 +197,10 @@ public class clickanddrag : MonoBehaviour
 		else if (gameObject.tag == "trafficTrap")
 		{
 			tutorialText.text = "";
-			tutorialText2.text = "";
+            tutorialBg.SetActive(false);
+            tutorialText2.text = "";
 
-			Destroy(gameObject);
+            Destroy(gameObject);
 			trafficController.breakAllLights ();
 			//transform.position = point;
 		}
