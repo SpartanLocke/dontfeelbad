@@ -18,6 +18,7 @@ public class clickanddrag : MonoBehaviour
     private Vector3 originalPos;
     public Vector3 point;
     private bool moved = false;
+	private bool untouched = true;
 	private bool dragging = false;
 	public Text tutorialText;
 	public Text tutorialText2;
@@ -57,13 +58,15 @@ public class clickanddrag : MonoBehaviour
             
         }
 		Debug.Log ("DRAGGING MODE");
+		untouched = false;
 		tutorialText.text = "Now drag the trap onto something it can be used on!";
 		tutorialText2.text = "Now drag the trap onto something it can be used on!";
 
 		if (gameObject.tag == "meteor" || gameObject.tag == "trafficTrap") {
 			//for now, make it green whereever
 			//TODO, limit by where i can place the meteor
-			gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 128, 0, .75f);
+			//gameObject.GetComponent<SpriteRenderer> ().color = new Color (0, 128, 0, .75f);
+			gameObject.transform.localScale = originalSize * scale * 2;
 		} else {
 			/*
 			//otherwise, gray for everything else
@@ -75,15 +78,19 @@ public class clickanddrag : MonoBehaviour
     }
 
 	void OnCollisionEnter2D(Collision2D other) {
-		Debug.Log (other.gameObject.name);
+		//Debug.Log (other.gameObject.name);
 		if (moved) {
+			Debug.Log (1);
 			if (other.gameObject.tag != "explosion") {
+				Debug.Log (2);
 				dragging = true;
 				//Debug.Log ("tag is: " + other.gameObject.tag);
-				if (gameObject.tag != "meteor") {
-					if (other.gameObject.tag == "man" || other.gameObject.tag == "car" && gameObject.tag == "mine") {
+				if (gameObject.tag != "meteor" && gameObject.tag != "trafficTrap") {
+					Debug.Log (3);
+					if (other.gameObject.tag == "man") {
 						//gameObject.GetComponent<SpriteRenderer> ().color = new Color(0,20,0,.75f);
 						gameObject.transform.localScale = originalSize * scale * 2;
+						Debug.Log ("size: " + (originalSize * scale * 2).ToString());
 						//Debug.Log ("GREEN");
 					} else {
 						//gameObject.GetComponent<SpriteRenderer> ().color = new Color (128, 128, 128, .75f);
@@ -92,6 +99,14 @@ public class clickanddrag : MonoBehaviour
 						//Debug.Log("GRAY COLLIDE");
 					}
 				}
+			}
+		}
+		if (!untouched && (gameObject.tag == "heartattack" || gameObject.tag == "shooter")) {
+			dragging = true;
+			if (other.gameObject.tag == "man") {
+				gameObject.transform.localScale = originalSize * scale * 2;
+			} else {
+				gameObject.transform.localScale = originalSize * scale;
 			}
 		}
 	}
@@ -107,10 +122,15 @@ public class clickanddrag : MonoBehaviour
 				}
 			}
 		}
-	}
-
-	void OnTriggerEnter2D() {
-		//Debug.Log("trigger");
+		if (!untouched && (gameObject.tag == "heartattack" || gameObject.tag == "shooter")) {
+			Debug.Log ("FFF: " + dragging);
+			if (dragging) {
+				Debug.Log ("GG");
+				gameObject.transform.localScale = originalSize * scale;
+			} else {
+				gameObject.transform.localScale = originalSize;
+			}
+		}
 	}
 
     void OnMouseUp()
@@ -135,6 +155,7 @@ public class clickanddrag : MonoBehaviour
             {
                 //MOVE BACK TO ORIGINAL SPOT
                 moved = false;
+				untouched = true;
 				dragging = false;
                 gameObject.transform.localScale = originalSize;
                 gameObject.transform.position = originalPos;
@@ -149,6 +170,7 @@ public class clickanddrag : MonoBehaviour
             if (!infected)
             {
                 moved = false;
+				untouched = true;
                 dragging = false;
                 gameObject.transform.localScale = originalSize;
                 gameObject.transform.position = originalPos;
